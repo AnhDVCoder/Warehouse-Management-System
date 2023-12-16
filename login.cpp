@@ -27,14 +27,19 @@ login::~login()
 
 void login::on_pb_login_clicked()
 {
+    QSqlQueryModel *model = new QSqlQueryModel;
+
     QString username = ui->le_username->text();
     QString password = ui->le_password->text();
 
     ConnOpen();
-    if(!mydb.isOpen()){
+    if(!mydb.open()){
         QMessageBox::warning(this, "CSDL", "Không kết nối được tới cơ sở dữ liệu!");
-    }else{
-        QSqlQueryModel *model = new QSqlQueryModel;
+    }
+    if(username.trimmed() == "" || password.trimmed() == ""){
+        QMessageBox::warning(this, "Thông báo", "Vui lòng nhập đầy đủ thông tin!");
+    }
+    else{
         model->setQuery("SELECT username, password FROM nguoi_dung WHERE username = '" + username + "' AND password = '" + password + "'");
         QString check_username = model->record(0).value("username").toString();
         QString check_password = model->record(0).value("password").toString();
@@ -48,6 +53,7 @@ void login::on_pb_login_clicked()
             QMessageBox::warning(this, "Đăng nhập", "Đăng nhập không thành công, vui lòng kiểm tra lại tài khoản hoặc mật khẩu!");
         }
     }
+
 
 
 

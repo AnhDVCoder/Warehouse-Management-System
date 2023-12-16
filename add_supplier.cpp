@@ -142,8 +142,12 @@ void add_supplier::on_pushButton_clicked()
 
             model->setQuery("INSERT INTO nha_cung_cap (tenNCC, dia_chi, sdtNCC, email) VALUES('" + tenNCC + "', '" + diaChi + "', '" + sdtNCC + "', '" + emailNCC + "')");
             QMessageBox::information(this, "Nhà cung cấp", "Thêm nhà cung cấp thành công!");
-            model->setQuery("SELECT * FROM nha_cung_cap");
+            model->setQuery("SELECT * FROM nha_cung_cap WHERE maNCC != 0");
             ui->tv_nha_cung_cap->setModel(model);
+            ui->le_tenNCC->setText("");
+            ui->le_dia_chi->setText("");
+            ui->le_sdtNCC->setText("");
+            ui->le_emailNCC->setText("");
         }
         else{
             QMessageBox::warning(this, "Nhà cung cấp", thongbao);

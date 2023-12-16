@@ -11,13 +11,13 @@ add_product::add_product(QWidget *parent)
 
     QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
     mydb.setDatabaseName(QCoreApplication::applicationDirPath() + "/warehouse-sqlite.db");
+    QSqlQueryModel *model = new QSqlQueryModel;
 
     QStringList list_category, list_supplier_name;
     if(!mydb.open()){
         QMessageBox::warning(this, "CSDL", "Không kết nối được tới cơ sở dữ liệu!");
     }
     else{
-        QSqlQueryModel *model = new QSqlQueryModel;
         model->setQuery("SELECT maPL, tenPL FROM phan_loai");
         for (int i = 0; i < model->rowCount(); i++){
             list_category << model->record(i).value("tenPL").toString();
@@ -29,9 +29,10 @@ add_product::add_product(QWidget *parent)
         }
 
         model->setQuery("SELECT maSP, tenSP, gia_nhap, gia_xuat, so_luong FROM san_pham");
+        ui->tv_list_san_pham->setModel(model);
         ui->cb_danhmuc->addItems(list_category);
         ui->cb_nha_cung_cap->addItems(list_supplier_name);
-        ui->tv_list_san_pham->setModel(model);
+
     }
 }
 

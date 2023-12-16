@@ -11,15 +11,15 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Quan ly kho</string>
+   <string>Quản lý kho</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QListView" name="listView">
+   <widget class="QTableView" name="tv_statistic">
     <property name="geometry">
      <rect>
-      <x>280</x>
+      <x>80</x>
       <y>60</y>
-      <width>301</width>
+      <width>571</width>
       <height>331</height>
      </rect>
     </property>
@@ -51,8 +51,9 @@
      <property name="title">
       <string>Người dùng</string>
      </property>
-     <addaction name="action_AddUser"/>
+     <addaction name="action_themnguoi"/>
      <addaction name="actionSetPermission"/>
+     <addaction name="action_xoa_nguoi"/>
     </widget>
     <widget class="QMenu" name="menuKho">
      <property name="title">
@@ -81,7 +82,14 @@
       <addaction name="action_add_supplier"/>
       <addaction name="action_modify_supplier"/>
      </widget>
-     <addaction name="action_i_l"/>
+     <widget class="QMenu" name="menu_i_l">
+      <property name="title">
+       <string>Đại lý</string>
+      </property>
+      <addaction name="action_themdaili"/>
+      <addaction name="action_quan_li_dai_ly"/>
+     </widget>
+     <addaction name="menu_i_l"/>
      <addaction name="menuNh_cung_c_p"/>
     </widget>
     <addaction name="menu_User"/>
@@ -93,6 +101,7 @@
     <property name="title">
      <string>Báo cáo</string>
     </property>
+    <addaction name="action_statistic"/>
    </widget>
    <addaction name="menuAccount"/>
    <addaction name="menuQu_n_l"/>
@@ -109,7 +118,7 @@
     <string>Đăng xuất</string>
    </property>
   </action>
-  <action name="action_AddUser">
+  <action name="action_themnguoi">
    <property name="text">
     <string>Thêm người dùng</string>
    </property>
@@ -139,11 +148,6 @@
     <string>Thêm sản phẩm</string>
    </property>
   </action>
-  <action name="action_i_l">
-   <property name="text">
-    <string>Đại lý</string>
-   </property>
-  </action>
   <action name="actionSetPermission">
    <property name="text">
     <string>Phân quyền</string>
@@ -167,6 +171,26 @@
   <action name="action_modify_supplier">
    <property name="text">
     <string>Sửa/Xóa nhà cung cấp</string>
+   </property>
+  </action>
+  <action name="action_xoa_nguoi">
+   <property name="text">
+    <string>Quản lý người dùng</string>
+   </property>
+  </action>
+  <action name="action_themdaili">
+   <property name="text">
+    <string>Thêm đại lý</string>
+   </property>
+  </action>
+  <action name="action_quan_li_dai_ly">
+   <property name="text">
+    <string>Quản lý đại lý</string>
+   </property>
+  </action>
+  <action name="action_statistic">
+   <property name="text">
+    <string>Thống kê</string>
    </property>
   </action>
  </widget>

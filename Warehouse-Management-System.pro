@@ -12,42 +12,64 @@ SOURCES += \
     add_category.cpp \
     add_product.cpp \
     add_supplier.cpp \
+    dangxuat.cpp \
     export_product.cpp \
     import_product.cpp \
     login.cpp \
     main.cpp \
     modify_product.cpp \
     modify_supplier.cpp \
+    nguoidung.cpp \
     overview.cpp \
-    profile.cpp \
-    setpermission.cpp
+    phanquyen.cpp \
+    quan_li_dai_li.cpp \
+    quan_li_nguoi_dung.cpp \
+    report.cpp \
+    sua_nguoi_dung.cpp \
+    them_dai_ly.cpp \
+    themnguoi.cpp
 
 HEADERS += \
     add_category.h \
     add_product.h \
     add_supplier.h \
+    dangxuat.h \
     export_product.h \
     import_product.h \
     login.h \
     modify_product.h \
     modify_supplier.h \
+    nguoidung.h \
     overview.h \
-    profile.h \
-    setpermission.h \
-    sql.h
+    phanquyen.h \
+    quan_li_dai_li.h \
+    quan_li_nguoi_dung.h \
+    report.h \
+    sql.h \
+    sua_nguoi_dung.h \
+    them_dai_ly.h \
+    themnguoi.h
 
 FORMS += \
     add_category.ui \
+    add_nguoi.ui \
     add_product.ui \
     add_supplier.ui \
+    dangxuat.ui \
     export_product.ui \
     import_product.ui \
     login.ui \
     modify_product.ui \
     modify_supplier.ui \
+    nguoidung.ui \
     overview.ui \
-    profile.ui \
-    setpermission.ui
+    phanquyen.ui \
+    quan_li_dai_li.ui \
+    quan_li_nguoi_dung.ui \
+    report.ui \
+    sua_nguoi_dung.ui \
+    them_dai_ly.ui \
+    themnguoi.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
