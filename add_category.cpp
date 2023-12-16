@@ -14,7 +14,7 @@ add_category::add_category(QWidget *parent)
     QSqlQueryModel *model = new QSqlQueryModel;
 
     if(!mydb.open()){
-        QMessageBox::information(this, "Database", "Fail connect to Database!");
+        QMessageBox::warning(this, "CSDL", "Không kết nối được tới cơ sở dữ liệu!");
     }
     else{
         model->setQuery("SELECT maPL, tenPL FROM phan_loai WHERE maPL != 0");
@@ -40,16 +40,16 @@ void add_category::on_pb_save_clicked()
         QMessageBox::information(this, "Database", "Fail connect to DB!");
     }else{
         if(tenPL == ""){
-            QMessageBox::information(this, "Error", "Chua nhap ten danh muc!");
+            QMessageBox::warning(this, "Lỗi", "Chưa nhập tên phân loại!");
         }
         else{
             if(!mydb.open()){
-                QMessageBox::information(this, "Database", "Fail connect to Database!");
+                QMessageBox::warning(this, "CSDL", "Không kết nối được tới cơ sở dữ liệu!");
             }
             else{
                 QSqlQueryModel *model = new QSqlQueryModel;
                 model->setQuery("INSERT INTO phan_loai (tenPL) VALUES('" + tenPL + "')");
-                QMessageBox::information(this, "Them phan loai", "Them thanh cong!");
+                QMessageBox::information(this, "Thêm phân loại", "Thêm phân loại thành công!");
                 model->setQuery("SELECT maPL, tenPL FROM phan_loai");
                 ui->tv_list_phan_loai->setModel(model);
             }
@@ -85,7 +85,7 @@ void add_category::on_pb_xoa_clicked()
 
     model->setQuery("DELETE FROM phan_loai WHERE maPL = " + QString::number(maPL));
     model->setQuery("UPDATE san_pham SET maPL = 0 WHERE maPL = " + QString::number(maPL));
-    QMessageBox::information(this, "Phan loai", "Xoa thanh cong!");
+    QMessageBox::information(this, "Phân loại", "Xóa phân loại thành công!");
     ui->le_category_name->setText("");
     ui->le_category_nid->setText("");
 }

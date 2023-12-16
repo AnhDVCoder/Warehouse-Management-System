@@ -16,7 +16,7 @@ modify_supplier::modify_supplier(QWidget *parent)
     QSqlQueryModel *model = new QSqlQueryModel;
 
     if(!mydb.open()){
-        QMessageBox::information(this, "Database", "Fail connect to DB!");
+        QMessageBox::warning(this, "CSDL", "Không kết nối được tới cơ sở dữ liệu!");
     }
     else{
         model->setQuery("SELECT * FROM nha_cung_cap WHERE maNCC != 0");
@@ -72,7 +72,7 @@ void modify_supplier::on_pb_sua_nha_cung_cap_clicked()
     QString thongbao;
 
     if(!mydb.open()){
-        QMessageBox::information(this, "Database", "Fail connect to DB!");
+        QMessageBox::warning(this, "CSDL", "Không kết nối được tới cơ sở dữ liệu!");
         flag1 = false;
     }
     else{
@@ -81,7 +81,7 @@ void modify_supplier::on_pb_sua_nha_cung_cap_clicked()
 
     if(maNCC != NULL){
         if(tenNCC.trimmed() == ""){
-            thongbao += "- Chua nhap ten nha cung cap!\n";
+            thongbao += "- Chưa nhập tên nhà cung cấp!\n";
             flag2 = false;
         }
         else{
@@ -89,7 +89,7 @@ void modify_supplier::on_pb_sua_nha_cung_cap_clicked()
             QString check = model->record(0).value("tenNCC").toString();
             if(check != ""){
 
-                thongbao += "- So dien thoai da ton tai!\n";
+                thongbao += "- Số điện thoại đã tồn tại!\n";
                 flag2 = false;
             }
             else{
@@ -99,7 +99,7 @@ void modify_supplier::on_pb_sua_nha_cung_cap_clicked()
         }
 
         if(diaChi.trimmed() == ""){
-            thongbao += "- Chua nhap dia chi!\n";
+            thongbao += "- Chưa nhập địa chỉ!\n";
             flag3 = false;
         }
         else{
@@ -115,13 +115,13 @@ void modify_supplier::on_pb_sua_nha_cung_cap_clicked()
 
 
         if(sdtNCC.trimmed() == ""){
-            thongbao += "- Chua nhap so dien thoai!\n";
+            thongbao += "- Chưa nhập số điện thoại!\n";
             flag4 = false;
         }
         else{
             match = re.match(sdtNCC);
             if(!match.hasMatch()){
-                thongbao += "- So dien thoai khong hop le!\n";
+                thongbao += "- Số điện thoại không hợp lệ!\n";
                 flag4 = false;
             }
             else{
@@ -129,7 +129,7 @@ void modify_supplier::on_pb_sua_nha_cung_cap_clicked()
                 QString check = model->record(0).value("sdtNCC").toString();
                 if(check != ""){
 
-                    thongbao += "- So dien thoai da ton tai!\n";
+                    thongbao += "- Số điện thoại đã tồn tại!\n";
                     flag4 = false;
                 }
                 else{
@@ -140,7 +140,7 @@ void modify_supplier::on_pb_sua_nha_cung_cap_clicked()
         }
 
         if(emailNCC.trimmed() == ""){
-            thongbao += "- Chua nhap email!\n";
+            thongbao += "- Chưa nhập email!\n";
             flag5 = false;
         }
         else{
@@ -148,7 +148,7 @@ void modify_supplier::on_pb_sua_nha_cung_cap_clicked()
             QString check = model->record(0).value("email").toString();
             if(check != ""){
 
-                thongbao += "- Email da ton tai!\n";
+                thongbao += "- Email đã tồn tại!\n";
                 flag5 = false;
             }
             else{
@@ -160,17 +160,17 @@ void modify_supplier::on_pb_sua_nha_cung_cap_clicked()
 
 
             model->setQuery("UPDATE nha_cung_cap SET tenNCC = '" + tenNCC + "', dia_chi = '" + diaChi + "', sdtNCC = '" + sdtNCC + "', email = '" + emailNCC + "' WHERE maNCC = " + QString::number(maNCC));
-            QMessageBox::information(this, "Nha cung cap", "Sua thanh cong!");
+            QMessageBox::information(this, "Nhà cung cấp", "Sửa thông tin nhà cung cấp thành công!");
             model->setQuery("SELECT * FROM nha_cung_cap WHERE maNCC != 0");
             ui->tv_nha_cung_cap->setModel(model);
         }
         else{
-            QMessageBox::information(this, "Nha cung cap", thongbao);
+            QMessageBox::warning(this, "Nhà cung cấp", thongbao);
         }
 
     }
     else{
-        QMessageBox::information(this, "Database", "Ban chua chon nha cung cap!");
+        QMessageBox::warning(this, "Nhà cung cấp", "Bạn chưa chọn nhà cung cấp!");
     }
 }
 
@@ -183,7 +183,7 @@ void modify_supplier::on_pb_xoa_nha_cung_cap_clicked()
     if(maNCC != NULL){
         model->setQuery("DELETE FROM nha_cung_cap WHERE maNCC = " + QString::number(maNCC));
         model->setQuery("UPDATE san_pham SET maNCC = 0 WHERE maNCC = " + QString::number(maNCC));
-        QMessageBox::information(this, "Nha cung cap", "Xoa thanh cong!");
+        QMessageBox::information(this, "Nhà cung cấp", "Xóa nhà cung cấp thành công!");
         model->setQuery("SELECT * FROM nha_cung_cap WHERE maNCC != 0");
         ui->tv_nha_cung_cap->setModel(model);
         ui->le_maNCC->setText("");
@@ -193,7 +193,7 @@ void modify_supplier::on_pb_xoa_nha_cung_cap_clicked()
         ui->le_emailNCC->setText("");
     }
     else{
-        QMessageBox::information(this, "Error", "Ban chua chon nha cung cap can xoa!");
+        QMessageBox::warning(this, "Nhà cung cấp", "Bạn chưa chọn nhà cung cấp!");
     }
 }
 

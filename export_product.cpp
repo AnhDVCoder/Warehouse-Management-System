@@ -13,7 +13,7 @@ export_product::export_product(QWidget *parent)
 
     QStringList list_product_name, list_retail_name;
     if(!mydb.open()){
-        QMessageBox::information(this, "Database", "Fail connect to Database 1!");
+        QMessageBox::warning(this, "CSDL", "Không kết nối được tới cơ sở dữ liệu!");
     }
     else{
         QSqlQueryModel *model = new QSqlQueryModel;
@@ -95,12 +95,12 @@ void export_product::on_pb_export_clicked()
     so_luong_xuat = ui->sb_so_luong_xuat->text().toInt();
 
     if(so_luong_xuat > so_luong_con){
-        QMessageBox::information(this, "Xuat kho", "Khong du san pham!");
+        QMessageBox::warning(this, "Xuất kho", "Số lượng sản phẩm xuất đi vượt quá số lượng hiện có!");
     }
     else{
         model->setQuery("INSERT INTO thong_ke (ngayTK, so_luong_xuat, maSP, tenSP) VALUES('" + thoi_gian + "', " + QString::number(so_luong_xuat) + ", " + QString::number(maSP) + ", '" + tenSP + "')");
         model->setQuery("UPDATE san_pham SET so_luong = so_luong - " + QString::number(so_luong_xuat) + " WHERE maSP = " + QString::number(maSP));
-        QMessageBox::information(this, "Xuat kho", "Xuat thanh cong!");
+        QMessageBox::information(this, "Xuất kho", "Xuất kho thành công!");
     }
 }
 

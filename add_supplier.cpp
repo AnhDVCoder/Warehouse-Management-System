@@ -17,7 +17,7 @@ add_supplier::add_supplier(QWidget *parent)
     QSqlQueryModel *model = new QSqlQueryModel;
 
     if(!mydb.open()){
-        QMessageBox::information(this, "Database", "Fail connect to DB!");
+        QMessageBox::warning(this, "CSDL", "Không kết nối được tới cơ sở dữ liệu!");
     }
     else{
         model->setQuery("SELECT * FROM nha_cung_cap WHERE maNCC != 0");
@@ -54,7 +54,7 @@ void add_supplier::on_pushButton_clicked()
     QString thongbao;
 
     if(!mydb.open()){
-        QMessageBox::information(this, "Database", "Fail connect to DB!");
+        QMessageBox::warning(this, "CSDL", "Không kết nối được tới cơ sở dữ liệu!");
         flag1 = false;
     }
     else{
@@ -63,7 +63,7 @@ void add_supplier::on_pushButton_clicked()
 
     if(flag1 == true){
         if(tenNCC.trimmed() == ""){
-            thongbao += "- Chua nhap ten nha cung cap!\n";
+            thongbao += "- Chưa nhập tên nhà cung cấp!\n";
             flag2 = false;
         }
         else{
@@ -71,7 +71,7 @@ void add_supplier::on_pushButton_clicked()
             QString check = model->record(0).value("tenNCC").toString();
             if(check != ""){
 
-                thongbao += "- Ten da ton tai!\n";
+                thongbao += "- Tên nhà cung cấp đã tồn tại!\n";
                 flag2 = false;
             }
             else{
@@ -81,7 +81,7 @@ void add_supplier::on_pushButton_clicked()
         }
 
         if(diaChi.trimmed() == ""){
-            thongbao += "- Chua nhap dia chi!\n";
+            thongbao += "- Chưa nhập địa chỉ!\n";
             flag3 = false;
         }
         else{
@@ -97,13 +97,13 @@ void add_supplier::on_pushButton_clicked()
 
 
         if(sdtNCC.trimmed() == ""){
-            thongbao += "- Chua nhap so dien thoai!\n";
+            thongbao += "- Chưa điền số điện thoại!\n";
             flag4 = false;
         }
         else{
             match = re.match(sdtNCC);
             if(!match.hasMatch()){
-                thongbao += "- So dien thoai khong hop le!\n";
+                thongbao += "- Số điện thoại không hợp lệ!\n";
                 flag4 = false;
             }
             else{
@@ -111,7 +111,7 @@ void add_supplier::on_pushButton_clicked()
                 QString check = model->record(0).value("sdtNCC").toString();
                 if(check != ""){
 
-                    thongbao += "- So dien thoai da ton tai!\n";
+                    thongbao += "- Số điện thoại đã tồn tại!\n";
                     flag4 = false;
                 }
                 else{
@@ -122,7 +122,7 @@ void add_supplier::on_pushButton_clicked()
         }
 
         if(emailNCC.trimmed() == ""){
-            thongbao += "- Chua nhap email!\n";
+            thongbao += "- Chưa nhập email nhà cung cấp!\n";
             flag5 = false;
         }
         else{
@@ -130,7 +130,7 @@ void add_supplier::on_pushButton_clicked()
             QString check = model->record(0).value("email").toString();
             if(check != ""){
 
-                thongbao += "- Email da ton tai!\n";
+                thongbao += "- Email này đã tồn tại!\n";
                 flag5 = false;
             }
             else{
@@ -141,17 +141,17 @@ void add_supplier::on_pushButton_clicked()
         if(flag2 == true && flag3 == true && flag4 == true && flag5 == true){
 
             model->setQuery("INSERT INTO nha_cung_cap (tenNCC, dia_chi, sdtNCC, email) VALUES('" + tenNCC + "', '" + diaChi + "', '" + sdtNCC + "', '" + emailNCC + "')");
-            QMessageBox::information(this, "Nha cung cap", "Them thanh cong!");
+            QMessageBox::information(this, "Nhà cung cấp", "Thêm nhà cung cấp thành công!");
             model->setQuery("SELECT * FROM nha_cung_cap");
             ui->tv_nha_cung_cap->setModel(model);
         }
         else{
-            QMessageBox::information(this, "Nha cung cap", thongbao);
+            QMessageBox::warning(this, "Nhà cung cấp", thongbao);
         }
 
     }
     else{
-        QMessageBox::information(this, "Database", "Fail connect to DB 2!");
+        QMessageBox::warning(this, "CSDL", "Không kết nối được tới cơ sở dữ liệu!");
     }
 
 }

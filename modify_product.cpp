@@ -14,7 +14,7 @@ modify_product::modify_product(QWidget *parent)
 
     QStringList list_category, list_supplier_name;
     if(!mydb.open()){
-        QMessageBox::information(this, "Database", "Fail connect to Database!");
+        QMessageBox::warning(this, "CSDL", "Không kết nối được tới cơ sở dữ liệu!");
     }
     else{
         QSqlQueryModel *model = new QSqlQueryModel;
@@ -30,7 +30,6 @@ modify_product::modify_product(QWidget *parent)
             list_supplier_name << model->record(i).value("TenNCC").toString();
         }
 
-        // model->setQuery("SELECT MaSP FROM san_pham ORDER BY MaSP DESC LIMIT 1");
 
 
         ui->cb_phan_loai->addItems(list_category);
@@ -129,7 +128,7 @@ void modify_product::on_pb_sua_clicked()
 
     if(maSP != NULL){
         if(tensp == ""){
-            thongbao += "- Chua nhap ten san pham!\n";
+            thongbao += "- Tên sản phẩm không được để trống!\n";
             flag1 = false;
         }
         else{
@@ -137,7 +136,7 @@ void modify_product::on_pb_sua_clicked()
         }
 
         if(phan_loai == NULL){
-            thongbao += "- Chua chon phan loai!\n";
+            thongbao += "- Chưa chọn phân loại!\n";
             maPL = 0;
         }
         else{
@@ -146,7 +145,7 @@ void modify_product::on_pb_sua_clicked()
         }
 
         if(gia_nhap < 0){
-            thongbao += "- Gia nhap khong duoc nho hon 0!\n";
+            thongbao += "- Giá nhập không được nhỏ hơn 0!\n";
             flag2 = false;
         }
         else{
@@ -154,7 +153,7 @@ void modify_product::on_pb_sua_clicked()
         }
 
         if(gia_xuat < 0){
-            thongbao += "- Gia xuat khong duoc nho hon 0!\n";
+            thongbao += "- Giá xuất không được nhỏ hơn 0!\n";
             flag3 = false;
         }
         else{
@@ -162,7 +161,7 @@ void modify_product::on_pb_sua_clicked()
         }
 
         if(nha_cung_cap == NULL){
-            thongbao += "- Chua chon nha cung cap!\n";
+            thongbao += "- Chưa chọn nhà cung cấp!\n";
             flag4 = false;
         }
         else{
@@ -171,28 +170,20 @@ void modify_product::on_pb_sua_clicked()
             flag4 = true;
         }
 
-
-
-        // if(!mydb.open()){
-        //     QMessageBox::information(this, "Database", "Fail connect to Database!");
-        // }
-        // else{
         if(flag1 == true && flag2 == true && flag3 == true && flag4 == true){
 
             model->setQuery("UPDATE san_pham SET tenSP = '" + tensp + "', maPL = " + QString::number(maPL) + ", gia_nhap = " + QString::number(gia_nhap) + ", gia_xuat = " + QString::number(gia_xuat) + ", maNCC = " + QString::number(maNCC) + " WHERE maSP = " + QString::number(maSP));
-            QMessageBox::information(this, "San pham", "Sua thanh cong!");
-            // thongbao = tensp + "\n" + QString::number(maPL) + "\n" + gia_nhap + "\n" + gia_xuat + "\n" + QString::number(maNCC);
-            // QMessageBox::information(this, "Them san pham", thongbao);
+            QMessageBox::information(this, "Sản phẩm", "Cập nhật sản phẩm thành công!");
             model->setQuery("SELECT maSP, tenSP, gia_nhap, gia_xuat, so_luong FROM san_pham");
             ui->tv_list_san_pham->setModel(model);
         }
         else{
-            QMessageBox::information(this, "Error", thongbao);
+            QMessageBox::warning(this, "Lỗi", thongbao);
         }
 
     }
     else{
-        QMessageBox::information(this, "Error", "Ban chua chon san pham!");
+        QMessageBox::warning(this, "Lỗi", "Bạn chưa chọn sản phẩm cần sửa!");
     }
 }
 
@@ -204,7 +195,7 @@ void modify_product::on_pb_xoa_clicked()
     int maSP = ui->le_msp->text().toInt();
     if(maSP != NULL){
         model->setQuery("DELETE FROM san_pham WHERE maSP = " + QString::number(maSP));
-        QMessageBox::information(this, "Error", "Xoa thanh cong!");
+        QMessageBox::information(this, "Sản phẩm", "Xóa sản phẩm thành công!");
         model->setQuery("SELECT maSP, tenSP, gia_nhap, gia_xuat, so_luong FROM san_pham");
         ui->tv_list_san_pham->setModel(model);
         ui->le_msp->setText("");
@@ -215,7 +206,7 @@ void modify_product::on_pb_xoa_clicked()
         ui->cb_nha_cung_cap->setCurrentIndex(0);
     }
     else{
-        QMessageBox::information(this, "Error", "Ban chua chon san pham can xoa!");
+        QMessageBox::information(this, "Lỗi", "Bạn chưa chọn sản phẩm cần xóa!");
     }
 }
 

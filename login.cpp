@@ -32,20 +32,20 @@ void login::on_pb_login_clicked()
 
     ConnOpen();
     if(!mydb.isOpen()){
-        QMessageBox::information(this, "Database", "Fail connect to Database!");
+        QMessageBox::warning(this, "CSDL", "Không kết nối được tới cơ sở dữ liệu!");
     }else{
         QSqlQueryModel *model = new QSqlQueryModel;
         model->setQuery("SELECT username, password FROM nguoi_dung WHERE username = '" + username + "' AND password = '" + password + "'");
         QString check_username = model->record(0).value("username").toString();
         QString check_password = model->record(0).value("password").toString();
         if(username == check_username && password == check_password){
-            QMessageBox::information(this, "Dang nhap", "Dang nhap thanh cong!");
+            QMessageBox::information(this, "Đăng nhập", "Đăng nhập thành công!");
             hide();
             overview = new class overview(this);
             overview->show();
         }
         else{
-            QMessageBox::information(this, "Dang nhap", "Dang nhap khong thanh cong!");
+            QMessageBox::warning(this, "Đăng nhập", "Đăng nhập không thành công, vui lòng kiểm tra lại tài khoản hoặc mật khẩu!");
         }
     }
 

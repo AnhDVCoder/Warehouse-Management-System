@@ -14,7 +14,7 @@ add_product::add_product(QWidget *parent)
 
     QStringList list_category, list_supplier_name;
     if(!mydb.open()){
-        QMessageBox::information(this, "Database", "Fail connect to Database!");
+        QMessageBox::warning(this, "CSDL", "Không kết nối được tới cơ sở dữ liệu!");
     }
     else{
         QSqlQueryModel *model = new QSqlQueryModel;
@@ -59,10 +59,10 @@ void add_product::on_pb_save_clicked()
     int maNCC, maPL;
 
     if(!mydb.open()){
-        QMessageBox::information(this, "Database", "Fail connect to DB!");
+        QMessageBox::warning(this, "CSDL", "Không kết nối được tới cơ sở dữ liệu!");
     }else{
         if(tensp == ""){
-            thongbao += "- Chua nhap ten san pham!\n";
+            thongbao += "- Chưa nhập tên sản phẩm!\n";
             flag1 = false;
         }
         else{
@@ -70,7 +70,7 @@ void add_product::on_pb_save_clicked()
         }
 
         if(danh_muc == NULL){
-            thongbao += "- Chua chon phan loai!\n";
+            thongbao += "- Chưa chọn phân loại!\n";
             maPL = 0;
         }
         else{
@@ -79,7 +79,7 @@ void add_product::on_pb_save_clicked()
         }
 
         if(gia_nhap == NULL){
-            thongbao += "- Chua nhap gia nhap!\n";
+            thongbao += "- Chưa điền giá nhập!\n";
             flag2 = false;
         }
         else{
@@ -87,7 +87,7 @@ void add_product::on_pb_save_clicked()
         }
 
         if(gia_xuat == NULL){
-            thongbao += "- Chua nhap gia xuat!\n";
+            thongbao += "- Chưa điền giá xuất!\n";
             flag3 = false;
         }
         else{
@@ -95,7 +95,7 @@ void add_product::on_pb_save_clicked()
         }
 
         if(nha_cung_cap == NULL){
-            thongbao += "- Chua chon nha cung cap!\n";
+            thongbao += "- Chưa chọn nhà cung cấp!\n";
             flag4 = false;
         }
         else{
@@ -107,14 +107,12 @@ void add_product::on_pb_save_clicked()
         if(flag1 == true && flag2 == true && flag3 == true && flag4 == true){
             QSqlQueryModel *model = new QSqlQueryModel;
             model->setQuery("INSERT INTO san_pham (tenSP, maPL, gia_nhap, gia_xuat, maNCC) VALUES('" + tensp + "', " + QString::number(maPL) + ", " + QString::number(gia_nhap) + ", " + QString::number(gia_xuat) + ", " + QString::number(maNCC) + ")");
-            QMessageBox::information(this, "Them san pham", "Them thanh cong!");
-            // thongbao = tensp + "\n" + QString::number(maPL) + "\n" + gia_nhap + "\n" + gia_xuat + "\n" + QString::number(maNCC);
-            // QMessageBox::information(this, "Them san pham", thongbao);
+            QMessageBox::information(this, "Sản phẩm", "Thêm sản phẩm thành công!");
             model->setQuery("SELECT maSP, tenSP, gia_nhap, gia_xuat, maPL, maNCC FROM san_pham");
             ui->tv_list_san_pham->setModel(model);
         }
         else{
-            QMessageBox::information(this, "Error", thongbao);
+            QMessageBox::warning(this, "Lỗi", thongbao);
         }
 
     }

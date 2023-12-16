@@ -15,7 +15,7 @@ import_product::import_product(QWidget *parent)
 
     QStringList list_product_name, list_supplier_name, list_supplier_id;
     if(!mydb.open()){
-        QMessageBox::information(this, "Database", "Fail connect to Database 1!");
+        QMessageBox::warning(this, "CSDL", "Không kết nối được tới cơ sở dữ liệu!");
     }
     else{
         QSqlQueryModel *model = new QSqlQueryModel;
@@ -55,7 +55,7 @@ void import_product::on_pb_save_clicked()
 
 
     if(!mydb.open()){
-        QMessageBox::information(this, "Database", "Fail connect to DB!");
+        QMessageBox::warning(this, "CSDL", "Không kết nối được tới cơ sở dữ liệu!");
         flag1 = false;
     }
     else{
@@ -64,11 +64,11 @@ void import_product::on_pb_save_clicked()
 
     if(flag1 == true){
         if(so_luong == NULL){
-            thongbao += "Ban chua nhap so luong!";
+            thongbao += "- Chưa nhập số lượng!";
             flag2 = false;
         }
         else if(so_luong <= 0){
-            thongbao += "So luong phai lon hon 0!";
+            thongbao += "- Số lượng nhập phải lớn hơn 0!";
             flag2 = false;
         }
         else{
@@ -87,10 +87,10 @@ void import_product::on_pb_save_clicked()
 
         model->setQuery("INSERT INTO thong_ke (ngayTK, so_luong_nhap, maSP, tenSP) VALUES('" + thoi_gian + "', " + QString::number(so_luong) + ", " + QString::number(maSP) + ", '" + tenSP + "')");
         model->setQuery("UPDATE san_pham SET so_luong = so_luong + " + QString::number(so_luong) + " WHERE maSP = " + QString::number(maSP));
-        QMessageBox::information(this, "Nhap kho", "Nhap thanh cong!");
+        QMessageBox::information(this, "Nhập kho", "Nhập kho thành công!");
     }
     else{
-        QMessageBox::information(this, "Nhap kho", "Nhap khong thanh cong!");
+        QMessageBox::information(this, "Nhập kho", thongbao);
     }
 }
 
