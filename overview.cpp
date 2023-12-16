@@ -14,6 +14,7 @@
 #include <QMessageBox>
 #include "nguoidung.h"
 #include "themnguoi.h"
+#include "phanquyen.h"
 #include "dangxuat.h"
 #include "ui_themnguoi.h"
 #include "ui_quan_li_nguoi_dung.h"
@@ -59,8 +60,8 @@ void overview::on_action_profile_triggered()
 
 void overview::on_actionSetPermission_triggered()
 {
-    // setpermission = new class setpermission();
-    // setpermission->show();
+    phanquyen = new class setpermission();
+    phanquyen->show();
 
 }
 

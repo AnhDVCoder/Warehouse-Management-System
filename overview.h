@@ -98,6 +98,7 @@ private:
     export_product *export_product;
 
     profile *nguoidung;
+    setpermission *phanquyen;
     themnguoi *themnguoi;
     xoa_nguoi_dung *xoa_nguoi_dung;
     login *loginWindow;
