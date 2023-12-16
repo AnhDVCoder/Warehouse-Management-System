@@ -48,6 +48,7 @@ void login::on_pb_login_clicked()
             hide();
             overview = new class overview(this);
             overview->show();
+            // overview->connect()
         }
         else{
             QMessageBox::warning(this, "Đăng nhập", "Đăng nhập không thành công, vui lòng kiểm tra lại tài khoản hoặc mật khẩu!");

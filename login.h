@@ -8,6 +8,8 @@
 #include <QFileInfo>
 #include <QSqlQueryModel>
 
+// #include "user.h"
+
 namespace Ui {
 class login;
 }
@@ -39,6 +41,10 @@ class login : public QDialog
 public:
     explicit login(QWidget *parent = nullptr);
     ~login();
+// signals:
+//     void accept(const user &user);
+// private slots:
+//     void on_buttonBox_accepted();
 
 private slots:
     void on_pb_login_clicked();

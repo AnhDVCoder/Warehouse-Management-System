@@ -48,7 +48,8 @@ HEADERS += \
     sql.h \
     sua_nguoi_dung.h \
     them_dai_ly.h \
-    themnguoi.h
+    themnguoi.h \
+    user.h
 
 FORMS += \
     add_category.ui \
