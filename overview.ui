@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>overview</class>
+ <widget class="QMainWindow" name="overview">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Quan ly kho</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QListView" name="listView">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>60</y>
+      <width>301</width>
+      <height>331</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuAccount">
+    <property name="title">
+     <string>Tài khoản</string>
+    </property>
+    <addaction name="separator"/>
+    <addaction name="separator"/>
+    <addaction name="action_profile"/>
+    <addaction name="action_logout"/>
+   </widget>
+   <widget class="QMenu" name="menuQu_n_l">
+    <property name="title">
+     <string>Quản lý</string>
+    </property>
+    <widget class="QMenu" name="menu_User">
+     <property name="title">
+      <string>Người dùng</string>
+     </property>
+     <addaction name="action_AddUser"/>
+     <addaction name="actionSetPermission"/>
+    </widget>
+    <widget class="QMenu" name="menuKho">
+     <property name="title">
+      <string>Kho</string>
+     </property>
+     <addaction name="action_import_goods"/>
+     <addaction name="action_export_goods"/>
+     <addaction name="action_transfer_goods"/>
+    </widget>
+    <widget class="QMenu" name="menu_Product">
+     <property name="title">
+      <string>Sản phẩm</string>
+     </property>
+     <addaction name="action_add_product"/>
+     <addaction name="action_modify_product"/>
+     <addaction name="action_add_category"/>
+    </widget>
+    <widget class="QMenu" name="menu_i_t_c">
+     <property name="title">
+      <string>Đối tác</string>
+     </property>
+     <widget class="QMenu" name="menuNh_cung_c_p">
+      <property name="title">
+       <string>Nhà cung cấp</string>
+      </property>
+      <addaction name="action_add_supplier"/>
+      <addaction name="action_modify_supplier"/>
+     </widget>
+     <addaction name="action_i_l"/>
+     <addaction name="menuNh_cung_c_p"/>
+    </widget>
+    <addaction name="menu_User"/>
+    <addaction name="menuKho"/>
+    <addaction name="menu_Product"/>
+    <addaction name="menu_i_t_c"/>
+   </widget>
+   <widget class="QMenu" name="menuB_o_c_o">
+    <property name="title">
+     <string>Báo cáo</string>
+    </property>
+   </widget>
+   <addaction name="menuAccount"/>
+   <addaction name="menuQu_n_l"/>
+   <addaction name="menuB_o_c_o"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="action_profile">
+   <property name="text">
+    <string>Hồ sơ cá nhân</string>
+   </property>
+  </action>
+  <action name="action_logout">
+   <property name="text">
+    <string>Đăng xuất</string>
+   </property>
+  </action>
+  <action name="action_AddUser">
+   <property name="text">
+    <string>Thêm người dùng</string>
+   </property>
+  </action>
+  <action name="action_SetPermission">
+   <property name="text">
+    <string>Phần quyền</string>
+   </property>
+  </action>
+  <action name="action_import_goods">
+   <property name="text">
+    <string>Nhập kho</string>
+   </property>
+  </action>
+  <action name="action_export_goods">
+   <property name="text">
+    <string>Xuất kho</string>
+   </property>
+  </action>
+  <action name="action_transfer_goods">
+   <property name="text">
+    <string>Điều chuyển</string>
+   </property>
+  </action>
+  <action name="action_add_product">
+   <property name="text">
+    <string>Thêm sản phẩm</string>
+   </property>
+  </action>
+  <action name="action_i_l">
+   <property name="text">
+    <string>Đại lý</string>
+   </property>
+  </action>
+  <action name="actionSetPermission">
+   <property name="text">
+    <string>Phân quyền</string>
+   </property>
+  </action>
+  <action name="action_add_category">
+   <property name="text">
+    <string>Phân loại</string>
+   </property>
+  </action>
+  <action name="action_modify_product">
+   <property name="text">
+    <string>Sửa/Xóa sản phẩm</string>
+   </property>
+  </action>
+  <action name="action_add_supplier">
+   <property name="text">
+    <string>Thêm nhà cung cấp</string>
+   </property>
+  </action>
+  <action name="action_modify_supplier">
+   <property name="text">
+    <string>Sửa/Xóa nhà cung cấp</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
