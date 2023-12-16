@@ -73,6 +73,7 @@ void export_product::on_cb_dai_ly_currentIndexChanged(int index)
     maDL = model->record(dai_ly).value("maDL").toInt();
 
     model->setQuery("SELECT tenDL, dia_chi, sdtDL, email FROM dai_ly WHERE maDL =" + QString::number(maDL));
+    ui->le_maDL->setText(QString::number(maDL));
     ui->le_dia_chiDL->setText(model->record(0).value("dia_chi").toString());
     ui->le_sdtDL->setText(model->record(0).value("sdtDL").toString());
 
@@ -86,21 +87,41 @@ void export_product::on_pb_export_clicked()
     QString thoi_gian = date.toString("yyyy-MM-dd hh:mm:ss");
 
     QSqlQueryModel *model = new QSqlQueryModel;
-    int maSP, so_luong_con, so_luong_xuat;
+    int maDL, maSP, so_luong_con, so_luong_xuat, gia_xuat, maND, maNCC;
     QString tenSP, tenDL, thongbao;
 
+    maDL = ui->le_maDL->text().toInt();
+    tenDL = ui->cb_dai_ly->currentText();
     maSP = ui->le_msp->text().toInt();
     tenSP = ui->cb_product->currentText();
     so_luong_con = ui->le_so_luong_con->text().toInt();
     so_luong_xuat = ui->sb_so_luong_xuat->text().toInt();
+    gia_xuat = ui->le_export_price->text().toLongLong();
+    maND = 2;
+
+    model->setQuery("SELECT maNCC FROM san_pham WHERE maSP = " + QString::number(maSP));
+    maNCC = model->record(0).value("tenNCC").toInt();
+
+    model->setQuery("SELECT tenNCC FROM nha_cung_cap WHERE maNCC = " + QString::number(maNCC));
+    // tenNCC = model->record(san_pham).value("tenNCC").toString();
 
     if(so_luong_xuat > so_luong_con){
         QMessageBox::warning(this, "Xuất kho", "Số lượng sản phẩm xuất đi vượt quá số lượng hiện có!");
     }
     else{
-        model->setQuery("INSERT INTO thong_ke (ngayTK, so_luong_xuat, maSP, tenSP) VALUES('" + thoi_gian + "', " + QString::number(so_luong_xuat) + ", " + QString::number(maSP) + ", '" + tenSP + "')");
+        model->setQuery("INSERT INTO thong_ke (ngayTK, so_luong_xuat, maSP, tenSP, maND) VALUES('" + thoi_gian + "', " + QString::number(so_luong_xuat) + ", " + QString::number(maSP) + ", '" + tenSP + "', '" + QString::number(maND) + "')");
+        model->setQuery("INSERT INTO phieu_xuat (maND, maDL, maSP, tenDL, tenSP, so_luong_xuat, gia_xuat, thoi_gian) VALUES('" + QString::number(maND) + "', " + QString::number(maDL) + ", " + QString::number(maSP) + ", '" + tenDL + "', '" + tenSP + "', " + QString::number(so_luong_xuat) + ", " + QString::number(gia_xuat) + ", '" + thoi_gian + "')");
         model->setQuery("UPDATE san_pham SET so_luong = so_luong - " + QString::number(so_luong_xuat) + " WHERE maSP = " + QString::number(maSP));
         QMessageBox::information(this, "Xuất kho", "Xuất kho thành công!");
+        ui->cb_product->setCurrentIndex(-1);
+        ui->cb_dai_ly->setCurrentIndex(-1);
+        ui->sb_so_luong_xuat->setValue(0);
     }
+}
+
+
+void export_product::on_pb_cancel_clicked()
+{
+    close();
 }
 

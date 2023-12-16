@@ -6,62 +6,129 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>639</width>
+    <width>652</width>
     <height>488</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Thống kê</string>
   </property>
-  <widget class="QTableView" name="tableView">
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
+  <widget class="QTableView" name="tv_infomation">
    <property name="geometry">
     <rect>
-     <x>220</x>
-     <y>130</y>
-     <width>321</width>
+     <x>30</x>
+     <y>170</y>
+     <width>591</width>
      <height>261</height>
     </rect>
    </property>
   </widget>
-  <widget class="QPushButton" name="pb_import_status">
+  <widget class="QLabel" name="lb_title">
    <property name="geometry">
     <rect>
-     <x>209</x>
-     <y>80</y>
-     <width>91</width>
+     <x>270</x>
+     <y>20</y>
+     <width>121</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>20</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Thống kê</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="cb_statistic">
+   <property name="geometry">
+    <rect>
+     <x>470</x>
+     <y>90</y>
+     <width>151</width>
      <height>24</height>
     </rect>
    </property>
-   <property name="text">
-    <string>Tình trạng nhập</string>
-   </property>
+   <item>
+    <property name="text">
+     <string>Thống kê nhập vào</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Thống kê xuất ra</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Thống kê tồn kho</string>
+    </property>
+   </item>
   </widget>
-  <widget class="QPushButton" name="pb_export_status">
+  <widget class="QLineEdit" name="le_statistic">
    <property name="geometry">
     <rect>
-     <x>330</x>
-     <y>80</y>
-     <width>101</width>
+     <x>470</x>
+     <y>90</y>
+     <width>21</width>
      <height>24</height>
     </rect>
    </property>
-   <property name="text">
-    <string>Tình trạng xuất</string>
-   </property>
   </widget>
-  <widget class="QPushButton" name="pb_remain_status">
+  <widget class="QComboBox" name="cb_order_by">
    <property name="geometry">
     <rect>
-     <x>460</x>
-     <y>80</y>
+     <x>310</x>
+     <y>90</y>
+     <width>151</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>Mới nhất -&gt; Cũ nhất</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Cũ nhất -&gt; Mới nhất</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLineEdit" name="le_order_by">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>90</y>
+     <width>21</width>
+     <height>24</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pb_out">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>90</y>
      <width>80</width>
      <height>24</height>
     </rect>
    </property>
    <property name="text">
-    <string>Tồn kho</string>
+    <string>Thoát</string>
    </property>
   </widget>
+  <zorder>tv_infomation</zorder>
+  <zorder>lb_title</zorder>
+  <zorder>le_statistic</zorder>
+  <zorder>cb_statistic</zorder>
+  <zorder>le_order_by</zorder>
+  <zorder>cb_order_by</zorder>
+  <zorder>pb_out</zorder>
  </widget>
  <resources/>
  <connections/>

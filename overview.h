@@ -9,6 +9,7 @@
 #include "modify_product.h"
 #include "modify_supplier.h"
 #include "export_product.h"
+#include "report.h"
 // #include "login.h"
 //hoang
 #include "nguoidung.h"
@@ -82,6 +83,10 @@ private slots:
 
     void on_action_logout_triggered();
 
+    void on_action_statistic_triggered();
+
+    void on_action_transfer_goods_triggered();
+
 private:
     Ui::overview *ui;
     add_product *add_product;
@@ -92,11 +97,13 @@ private:
     modify_supplier *modify_supplier;
     export_product *export_product;
 
+    profile *nguoidung;
     themnguoi *themnguoi;
     xoa_nguoi_dung *xoa_nguoi_dung;
     login *loginWindow;
-    quan_li_dai_li* quan_li_dai_li;
-    them_dai_ly*them_dai_ly;
+    quan_li_dai_li *quan_li_dai_li;
+    them_dai_ly *them_dai_ly;
+    report *report;
 };
 
 #endif // OVERVIEW_H

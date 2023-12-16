@@ -6,6 +6,7 @@
 #include "modify_supplier.h"
 #include "export_product.h"
 #include "ui_overview.h"
+#include "report.h"
 #include <QMessageBox>
 //Hoang
 #include "login.h"
@@ -50,8 +51,9 @@ overview::~overview()
 
 void overview::on_action_profile_triggered()
 {
-    // profile = new class profile();
-    // profile->show();
+    nguoidung = new profile(this);
+    nguoidung->show();
+
 }
 
 
@@ -161,5 +163,18 @@ void overview::on_action_logout_triggered()
         loginWindow->show();
     }
 
+}
+
+
+void overview::on_action_statistic_triggered()
+{
+    report = new class report();
+             report->show();
+}
+
+
+void overview::on_action_transfer_goods_triggered()
+{
+    QMessageBox::information(this, "Thông báo", "Tính năng đang phát triển, sẽ cập nhật trong những phiên bản sau!");
 }
 

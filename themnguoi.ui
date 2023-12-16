@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Thêm người dùng</string>
   </property>
   <widget class="QLabel" name="lb_phone">
    <property name="geometry">

@@ -47,11 +47,13 @@ void import_product::on_pb_save_clicked()
     int san_pham = ui->cb_product->currentIndex();
     long long so_luong = ui->sb_so_luong->text().toULongLong();
     bool flag1, flag2, flag3;
-    QString thongbao, tenSP;
+    QString thongbao, tenSP, tenNCC;
+    int maND = 2;
+    long long gia_nhap;
 
     QDateTime date = QDateTime::currentDateTime();
     QString thoi_gian = date.toString("yyyy-MM-dd hh:mm:ss");
-    int maSP;
+    int maSP, maNCC;
 
 
     if(!mydb.open()){
@@ -76,16 +78,23 @@ void import_product::on_pb_save_clicked()
         }
 
 
-        model->setQuery("SELECT maSP, tenSP FROM san_pham");
+        model->setQuery("SELECT maSP, tenSP, maNCC, gia_nhap FROM san_pham");
         maSP = model->record(san_pham).value("maSP").toInt();
         tenSP = model->record(san_pham).value("tenSP").toString();
+        maNCC = model->record(san_pham).value("maNCC").toInt();
+        gia_nhap = model->record(san_pham).value("gia_nhap").toLongLong();
+
+        model->setQuery("SELECT tenNCC FROM nha_cung_cap WHERE maNCC = " + QString::number(maNCC));
+        tenNCC = model->record(0).value("tenNCC").toString();
+
 
 
     }
 
     if(flag1 == true && flag2 == true){
 
-        model->setQuery("INSERT INTO thong_ke (ngayTK, so_luong_nhap, maSP, tenSP) VALUES('" + thoi_gian + "', " + QString::number(so_luong) + ", " + QString::number(maSP) + ", '" + tenSP + "')");
+        model->setQuery("INSERT INTO thong_ke (ngayTK, so_luong_nhap, maSP, tenSP, maND) VALUES('" + thoi_gian + "', " + QString::number(so_luong) + ", " + QString::number(maSP) + ", '" + tenSP + "', '" + QString::number(maND) + "')");
+        model->setQuery("INSERT INTO phieu_nhap (maND, maNCC, maSP, tenNCC, tenSP, so_luong_nhap, gia_nhap, thoi_gian) VALUES('" + QString::number(maND) + "', " + QString::number(maNCC) + ", " + QString::number(maSP) + ", '" + tenNCC + "', '" + tenSP + "', " + QString::number(so_luong) + ", " + QString::number(gia_nhap) + ", '" + thoi_gian + "')");
         model->setQuery("UPDATE san_pham SET so_luong = so_luong + " + QString::number(so_luong) + " WHERE maSP = " + QString::number(maSP));
         QMessageBox::information(this, "Nhập kho", "Nhập kho thành công!");
     }

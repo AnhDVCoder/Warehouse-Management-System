@@ -26,6 +26,8 @@ private slots:
 
     void on_pb_export_clicked();
 
+    void on_pb_cancel_clicked();
+
 private:
     Ui::export_product *ui;
 };

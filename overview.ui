@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>521</width>
+    <height>457</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,11 +17,24 @@
    <widget class="QTableView" name="tv_statistic">
     <property name="geometry">
      <rect>
-      <x>80</x>
-      <y>60</y>
-      <width>571</width>
+      <x>50</x>
+      <y>50</y>
+      <width>421</width>
       <height>331</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>30</y>
+      <width>161</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Lịch sử nhập/xuất gần nhất</string>
     </property>
    </widget>
   </widget>
@@ -30,7 +43,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>521</width>
      <height>21</height>
     </rect>
    </property>
